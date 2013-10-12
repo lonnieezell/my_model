@@ -14,40 +14,39 @@ MY_Model is not an ORM.
 
 To get started with a new model, you can use the following skeleton file:
 
+    class X_model extends MY_Model
+    {
+        protected $_table       = '';
+        protected $key          = 'id';
+        protected $soft_deletes = FALSE;
+        protected $date_format  = 'datetime';
+        protected $log_user     = FALSE;
 
-class X_model extends MY_Model
-{
-    protected $_table       = '';
-    protected $key          = 'id';
-    protected $soft_deletes = FALSE;
-    protected $date_format  = 'datetime';
-    protected $log_user     = FALSE;
+        protected $set_created      = TRUE;
+        protected $created_field    = 'created_on';
+        protected $created_by_field = 'created_by';
 
-    protected $set_created      = TRUE;
-    protected $created_field    = 'created_on';
-    protected $created_by_field = 'created_by';
+        protected $set_modified      = FALSE;
+        protected $modified_field    = 'modified_on';
+        protected $modified_by_field = 'modified_by';
+        protected $deleted_by_field  = 'deleted_by';
 
-    protected $set_modified      = FALSE;
-    protected $modified_field    = 'modified_on';
-    protected $modified_by_field = 'modified_by';
-    protected $deleted_by_field  = 'deleted_by';
-
-    // Observers
-    protected $before_insert    = array();
-    protected $after_insert     = array();
-    protected $before_update    = array();
-    protected $after_update     = array();
-    protected $before_find      = array();
-    protected $after_find       = array();
-    protected $before_delete    = array();
-    protected $after_delete     = array();
-
-    protected $return_type            = 'object';
-    protected $protected_attributes   = array();
-
-    protected $validate         = array();
-    protected $skip_validation  = false;
-}
+        // Observers
+        protected $before_insert    = array();
+        protected $after_insert     = array();
+        protected $before_update    = array();
+        protected $after_update     = array();
+        protected $before_find      = array();
+        protected $after_find       = array();
+        protected $before_delete    = array();
+        protected $after_delete     = array();
+    
+        protected $return_type            = 'object';
+        protected $protected_attributes   = array();
+    
+        protected $validate         = array();
+        protected $skip_validation  = false;
+    }
 
 
 This is the bare minimum needed to take advantage of MY_Model's built-in functions. All variables shown here are set to their default, so you don't need to show them if you are using the default values.  Model_name is the name of your class and follows the same rules as [CodeIgniter models](http://codeigniter.com/user_guide/general/models.html).
