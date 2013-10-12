@@ -17,22 +17,20 @@ To get started with a new model, you can use the following skeleton file:
 
     class X_model extends MY_Model
     {
-        protected $table_name   = '';
-        protected $key          = 'id';
+        protected $_table       = '';
+        protected $primary_key  = 'id';
         protected $soft_deletes = FALSE;
         protected $date_format  = 'datetime';
         protected $log_user     = FALSE;
 
-        protected $set_created  = TRUE;
+        protected $set_created      = TRUE;
         protected $created_field    = 'created_on';
         protected $created_by_field = 'created_by';
 
-        protected $set_modified     = FALSE;
-        protected $modified_field   = 'modified_on';
+        protected $set_modified      = FALSE;
+        protected $modified_field    = 'modified_on';
         protected $modified_by_field = 'modified_by';
-
-        protected $deleted_field    = 'deleted';
-        protected $deleted_by_field = 'deleted_by';
+        protected $deleted_by_field  = 'deleted_by';
 
         // Observers
         protected $before_insert    = array();
@@ -44,12 +42,11 @@ To get started with a new model, you can use the following skeleton file:
         protected $before_delete    = array();
         protected $after_delete     = array();
 
-        protected $return_type      = 'object';
+        protected $return_type            = 'object';
         protected $protected_attributes   = array();
 
-        protected $validation_rules         = array();
-        protected $insert_validation_rules  = array();
-        protected $skip_validation          = false;
+        protected $validate         = array();
+        protected $skip_validation  = false;
     }
 
 
