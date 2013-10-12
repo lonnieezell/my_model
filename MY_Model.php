@@ -36,7 +36,7 @@ class MY_Model extends CI_Model {
      *
      * @var string
      */
-    protected   $primary_key    = 'id';
+    protected   $key    = 'id';
 
     /**
      * Field name to use to the created time column in the DB table.
@@ -276,7 +276,7 @@ class MY_Model extends CI_Model {
     /**
      * Finds a single record based on it's primary key. Will ignore deleted rows.
      *
-     * @param  mixed $id The primary_key value of the object to retrieve.
+     * @param  mixed $id The key value of the object to retrieve.
      * @return object
      */
     public function find($id)
@@ -289,7 +289,7 @@ class MY_Model extends CI_Model {
             $this->dbr->where($this->soft_delete_key, FALSE);
         }
 
-        $this->dbr->where($this->primary_key, $id);
+        $this->dbr->where($this->key, $id);
         $row = $this->dbr->get($this->_table);
         $row = $row->{$this->_return_type()}();
 
@@ -355,7 +355,7 @@ class MY_Model extends CI_Model {
      */
     public function find_many($values)
     {
-        $this->dbr->where_in($this->primary_key, $values);
+        $this->dbr->where_in($this->key, $values);
 
         return $this->find_all();
     }
@@ -423,7 +423,7 @@ class MY_Model extends CI_Model {
      *
      * @param  array $data An array of key/value pairs to insert to database.
      * @param  array $skip_validation   If TRUE, will skip validation of data for this call only.
-     * @return mixed       The primary_key value of the inserted record, or FALSE.
+     * @return mixed       The key value of the inserted record, or FALSE.
      */
     public function insert($data, $skip_validation=FALSE)
     {
@@ -503,7 +503,7 @@ class MY_Model extends CI_Model {
     /**
      * Updates an existing record in the database.
      *
-     * @param  mixed $id   The primary_key value of the record to update.
+     * @param  mixed $id   The key value of the record to update.
      * @param  array $data An array of value pairs to update in the record.
      * @param  array $skip_validation   If TRUE, will skip validation of data for this call only.
      * @return bool
@@ -520,7 +520,7 @@ class MY_Model extends CI_Model {
         // Will be false if it didn't validate.
         if ($data !== FALSE)
         {
-            $this->dbw->where($this->primary_key, $id);
+            $this->dbw->where($this->key, $id);
             $this->dbw->set($data);
             $result = $this->dbw->update($this->_table);
 
@@ -591,7 +591,7 @@ class MY_Model extends CI_Model {
      *
      * $this->model->update_many($ids, $data);
      *
-     * @param  array $ids  An array of primary_key values to update.
+     * @param  array $ids  An array of key values to update.
      * @param  array $data An array of value pairs to modify in each row.
      * @param  array $skip_validation   If TRUE, will skip validation of data for this call only.
      * @return bool
@@ -608,7 +608,7 @@ class MY_Model extends CI_Model {
         // Will be false if it didn't validate.
         if ($data !== FALSE)
         {
-            $this->dbw->where_in($this->primary_key, $ids);
+            $this->dbw->where_in($this->key, $ids);
             $this->dbw->set($data);
             $result = $this->dbw->update($this->_table);
 
@@ -712,7 +712,7 @@ class MY_Model extends CI_Model {
     {
         $this->trigger('before_delete', $id);
 
-         $this->dbw->where($this->primary_key, $id);
+         $this->dbw->where($this->key, $id);
 
         if ($this->soft_deletes)
         {
@@ -926,7 +926,7 @@ class MY_Model extends CI_Model {
         }
         else
         {
-            $key = $this->primary_key;
+            $key = $this->key;
             $value = $args[0];
         }
 
@@ -947,7 +947,7 @@ class MY_Model extends CI_Model {
     /**
      * A convenience method to return only a single field of the specified row.
      *
-     * @param mixed  $id    The primary_key value to match against.
+     * @param mixed  $id    The key value to match against.
      * @param string $field The field to search for.
      *
      * @return bool|mixed The value of the field.
@@ -955,7 +955,7 @@ class MY_Model extends CI_Model {
     public function get_field($id=NULL, $field='')
     {
         $this->dbr->select($field);
-        $this->dbr->where($this->primary_key, $id);
+        $this->dbr->where($this->key, $id);
         $query = $this->dbr->get($this->table);
 
         if ($query && $query->num_rows() > 0)
