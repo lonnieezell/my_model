@@ -314,7 +314,7 @@ class MY_Model extends CI_Model {
             $this->dbr->where($this->table_name.'.'.$this->soft_delete_key, FALSE);
         }
 
-        $this->dbr->where($this->primary_key, $id);
+        $this->dbr->where($this->table_name.'.'.$this->primary_key, $id);
         $row = $this->dbr->get($this->table_name);
         $row = $this->_return_data($row);
 		  
@@ -1026,7 +1026,7 @@ class MY_Model extends CI_Model {
     public function is_unique($field, $value)
     {
         $this->dbr->where($field, $value);
-        $query = $this->dbr->get($this->table);
+        $query = $this->dbr->get($this->table_name);
 
         if ($query && $query->num_rows() == 0)
         {
