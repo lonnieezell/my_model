@@ -709,7 +709,7 @@ class MY_Model extends CI_Model {
     {
         $data = $this->trigger('before_update', $data);
 
-        if ($skip_validation === FALSE)
+        if ($this->skip_validation === FALSE)
         {
             $data = $this->validate($data);
             if ( ! $data)
