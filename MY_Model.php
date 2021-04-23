@@ -1446,6 +1446,6 @@ class MY_Model extends CI_Model {
     public function limit($value, $offset = '') { $this->dbr->limit($value, $offset); return $this; }
     public function offset($offset) { $this->dbr->offset($offset); return $this; }
     public function set($key, $value = '', $escape = TRUE) { $this->dbw->set($key, $value, $escape); return $this; }
-    public function count_all_results() { $this->dbr->count_all_results($this->table_name); return $this; }
+    public function count_all_results() { return $this->dbr->count_all_results($this->table_name); }
 
 }
